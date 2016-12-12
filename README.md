@@ -24,3 +24,18 @@ For example:
   },
 ]
 ```
+
+# How to run
+*NOTE:* Python 2.7 must be installed.
+
+First install dependencies with `pip install -r requirements.txt`.
+
+To run with default url, execute `python main.py` in the terminal. This will run the crawler on `http://fayimora.com`.
+
+To run the crawler with a custom url, pass in a url flag. For example, to run with `https://gocardless.com`, execute `python main.py --url https://gocardless.com`.
+
+*NOTE:* The URL specified must contain the protocol and full domain name. `example.com` is invalid however, `http://example.com` is valid.
+
+
+
+# How to run tests
