@@ -4,4 +4,4 @@ RUN mkdir -p /asset-aggregator
 WORKDIR /asset-aggregator
 COPY . /asset-aggregator
 
-CMD python main.py --url https://gocardless.com
+CMD python main.py --log --url https://gocardless.com
