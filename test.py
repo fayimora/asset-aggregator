@@ -6,7 +6,7 @@ from utils import requests_html_reader, test_html_reader
 class TestCrawler(unittest.TestCase):
     def setUp(self):
         self.domain = 'http://localhost:8090'
-        self.crawler = Crawler(self.domain, test_html_reader)
+        self.crawler = Crawler(self.domain, test_html_reader, log_info=True)
         self.test_html_doc_page1 = test_html_reader('./test-data/page1.html')
         self.test_html_doc_page2 = test_html_reader('./test-data/page2.html')
 
@@ -54,7 +54,7 @@ class TestCrawler(unittest.TestCase):
 
 
     def test_parse_iter(self):
-        crawler = Crawler(self.domain, requests_html_reader)
+        crawler = Crawler(self.domain, requests_html_reader, log_info=True)
         results = crawler.parse_iter(self.domain, [])
 
         # make sure we get a list back
