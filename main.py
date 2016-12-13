@@ -1,14 +1,13 @@
-import click
-import crawler
+import click, crawler
 from utils import requests_html_reader
 from jsonpickle import encode
 
 
 @click.command()
 @click.option('--url', default='https://fayimora.com', help="The URL we want to crawl")
-def crawl(url):
-    c = crawler.Crawler(url, requests_html_reader)
-    # import time
+@click.option('--log', default=False, is_flag=True, help="If progress should be logged")
+def crawl(url, log):
+    c = crawler.Crawler(url, requests_html_reader, log_info=log)
     # start_time = time.time()
     results = c.run()
     # finish_time = time.time() - start_time

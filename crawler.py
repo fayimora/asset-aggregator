@@ -1,6 +1,10 @@
 from parsel import Selector
 from urlparse import urlparse, urljoin
+import logging
 
+LOG_FORMAT = '%(asctime)-15s: %(message)s'
+logging.basicConfig(format=LOG_FORMAT)
+logger = logging.getLogger()
 
 class Result(object):
     """Domain representing a single result"""
@@ -10,7 +14,7 @@ class Result(object):
 
 
 class Crawler(object):
-    def __init__(self, url, html_reader):
+    def __init__(self, url, html_reader, log_info=False):
         """ Sets the initial state of the crawler.
         url -- The full starting URL. This value must contain the protocol and domain.
                 domain.tld will not be accepted but http://domain.tld will work fine
@@ -18,12 +22,15 @@ class Crawler(object):
                 options out there this enables you to easily try them out. The function expect a url
                 as a string and return the parsed document as a string.
                 Signature: html_reader(string) -> string
+        log_info -- boolean flag for logging. The crawler logs progress to the console if set to True
         """
         super(Crawler, self).__init__()
         self.url = str(url.split("#")[0])
         self.visited_sites = {} # make sure we dont visit a page more than once
         self.visit_queue = set([self.url]) # implemented as a set to avoid duplicates at all cost
         self.html_reader = html_reader
+        if log_info:
+            logger.setLevel(logging.INFO)
 
 
     def run(self):
@@ -60,15 +67,19 @@ class Crawler(object):
         results = initial_results[:] # dont mutate the initial results
         while len(self.visit_queue) > 0:
             curr_url = self.visit_queue.pop()
+            logger.info("Checking "+curr_url)
 
             if self.visited_sites.has_key(curr_url): # don't visit a node more than once
                 continue
 
             self.visited_sites[curr_url] = True
             html_doc = self.html_reader(curr_url)
-            child_pages = self.extract_links(html_doc)
 
+            logger.info("\tExtracting links...")
+            child_pages = self.extract_links(html_doc)
             self.visit_queue = self.visit_queue.union(child_pages)
+
+            logger.info("\tExtracting assets...")
             page_assets = self.extract_asset_links(html_doc)
             new_result = Result(url=curr_url, assets=page_assets)
             results.append(new_result)
@@ -118,9 +129,16 @@ class Crawler(object):
         sel = Selector(html_doc)
         assets = set([])
 
+        logger.info("\t\tExtracting images...")
         images = self.extract_assets(sel.css('img'), '@src')
+
+        logger.info("\t\tExtracting stylesheets...")
         stylesheets = self.extract_assets(sel.css('link'), '@href')
+
+        logger.info("\t\tExtracting scripts...")
         scripts = self.extract_assets(sel.css('script'), '@src')
+
+        logger.info("\t\tMerging assets...")
         assets = images.union(stylesheets).union(scripts)
 
         return assets
