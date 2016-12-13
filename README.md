@@ -63,6 +63,7 @@ Please note that the image name `fayimora/asset-aggregator` above can and probab
 
 The docker container runs the crawler on `https://gocardless.com` with logging enabled. To disable this, edit the `Dockerfile` in the project and remove the `--log` flag. You can also edit the url in the Dockerfile.
 
+![](https://fayidrop.s3-eu-west-1.amazonaws.com/Screen-Recording-2016-12-13-09-38-34.gif)
 
 # How to run tests
 **NOTE:** dependencies must be installed first. See above section.
