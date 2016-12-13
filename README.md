@@ -38,7 +38,7 @@ As long as a page is linked on some other page, we eventually get to visit it. I
 A number of languages like ruby and perl could have easily been used. However, because I have more familiarity with python than other scripting languages and python has a great set of libraries for manipulating data, I decided to go with python.
 
 # How to run
-*NOTE:* Python 2.7 must be installed.
+**NOTE:** Python 2.7 must be installed.
 
 First install dependencies with `pip install -r requirements.txt`.
 
@@ -46,7 +46,7 @@ To run with default url, execute `python main.py` in the terminal. This will run
 
 To run the crawler with a custom url, pass in a url flag. For example, to run with `https://gocardless.com`, execute `python main.py --url https://gocardless.com`.
 
-*NOTE:* The URL specified must contain the protocol and full domain name. `example.com` is invalid however, `http://example.com` is valid.
+**NOTE:** The URL specified must contain the protocol and full domain name. `example.com` is invalid however, `http://example.com` is valid.
 
 ### Logging
 When running on a large website, it can be boring staring at the terminal with no indication of what's happening. To fix this, you can enable logging with the `--log` flag. Example run with logging: `python main.py --log --url https://gocardless.com`
@@ -65,10 +65,10 @@ The docker container runs the crawler on `https://gocardless.com` with logging e
 
 
 # How to run tests
-*NOTE:* dependencies must be installed first. See above section.
-A test web server must be running for all tests to complete. The root folder served by the web-server should be `./test-data`.
+**NOTE:** dependencies must be installed first. See above section.
 
-### Sample run
+A test web server must be running for all tests to complete. The root folder served by the web-server should be `./test-data`. Steps to run tests are:
+
 - `cd test-data`
 - `python -m SimpleHTTPServer 8090`
 - `python test.py` (in another terminal and from the root directory of the project)
