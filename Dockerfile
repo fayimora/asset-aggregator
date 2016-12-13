@@ -1,4 +1,4 @@
-FROM python:2.7.12-onbuild
+FROM python:2.7-onbuild
 
 RUN mkdir -p /asset-aggregator
 WORKDIR /asset-aggregator
