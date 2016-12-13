@@ -25,14 +25,14 @@ For example:
 ```
 
 # Solution Description
-I decided to go with the Breadth First Search algorithm to solve this problem. The algorithm
+I decided to go with the Breadth First Search algorithm to solve this problem. The crawler
 
 - takes the given url, gathers the assets on that page and add them to a result set
 - it then gathers all the links on that page and adds them to a visit queue
 - while the queue is not empty
   - it repeats steps 1 and 2 above for every link in the queue
 
-As long as aa page s linked on another page, we eventually get to visit it. In other to make sure we don't duplicate asset extraction, we make a note of every page we have previously visited and never visit it again. This also helps prevent a cyclic traversal(ensure the program does not end up in an indefinite loop).
+As long as a page is linked on some other page, we eventually get to visit it. In other to make sure we don't duplicate visits, we make a note of every page we have previously visited and never visit it again. This also helps prevent a cyclic traversal(ensure the program does not end up in an indefinite loop).
 
 ### Why python
 A number of languages like ruby and perl could have easily been used. However, because I have more familiarity with python than other scripting languages and python has a great set of libraries for manipulating data, I decided to go with python.
@@ -54,7 +54,7 @@ When running on a large website, it can be boring staring at the terminal with n
 ### Running in isolation
 Love containers? Don't want to install dependencies on your computer? Docker has you covered.
 
-First, you build the container by running the following commands in the rot folder of the project.
+First, you build the container by running the following commands in the root folder of the project.
 
 - `docker build -t fayimora/asset-aggregator .` (~81mb download on first run)
 - `docker run fayimora/asset-aggregator`
@@ -72,3 +72,7 @@ A test web server must be running for all tests to complete. The root folder ser
 - `cd test-data`
 - `python -m SimpleHTTPServer 8090`
 - `python test.py` (in another terminal and from the root directory of the project)
+
+# Misc
+- Implementation time - approx 3 hours
+- `http://gocardless.com` takes 17 minutes on average to run
