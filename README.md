@@ -75,4 +75,4 @@ A test web server must be running for all tests to complete. The root folder ser
 
 # Misc
 - Time spent on task(analysing, implementating, testing, documentation) - approx 4 hours
-- `http://gocardless.com` takes 17 minutes on average to run
+- `https://gocardless.com` takes 17 minutes on average to run
