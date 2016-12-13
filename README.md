@@ -37,5 +37,10 @@ To run the crawler with a custom url, pass in a url flag. For example, to run wi
 *NOTE:* The URL specified must contain the protocol and full domain name. `example.com` is invalid however, `http://example.com` is valid.
 
 
+## Using Docker
+Love containers? Don't want to install dependencies in
+
 
 # How to run tests
+*NOTE:* dependencies must be installed first. See above section.
+execute `python test.py`
