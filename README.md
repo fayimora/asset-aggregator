@@ -75,5 +75,5 @@ A test web server must be running for all tests to complete. The root folder ser
 - `python test.py` (in another terminal and from the root directory of the project)
 
 # Misc
-- Time spent on task(analysing, implementating, testing, documentation) - approx 4 hours
+- Time spent on task(analysing, implementing, testing, documentation) - approx 4 hours
 - `https://gocardless.com` takes 17 minutes on average to run
