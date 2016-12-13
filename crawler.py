@@ -41,22 +41,25 @@ class Crawler(object):
     # used for smaller sites because python has a maxrecursion limit of 999. I had to re-write this as a
     # loop below in parse_iter
     # def parse_r(self, url, results): # this really should not be accesed from outside
-    #
+    #     logger.info("Checking "+curr_url)
     #     if len(self.visit_queue) == 0: # no more pages to visit
     #         return results
     #
     #     if self.visited_sites.has_key(url): # this helps us avoid visiting a page more than once, site wide
     #         return self.parse_r(self.visit_queue.pop(), results)
     #
-    #     # print(url)
     #     self.visited_sites[url] = True
     #     html_doc = requests.get(url).text
-    #     child_pages = self.extract_links(html_doc)
     #
+    #     logger.info("\tExtracting links...")
+    #     child_pages = self.extract_links(html_doc)
     #     self.visit_queue = self.visit_queue.union(child_pages)
+    #
+    #     logger.info("\tExtracting assets...")
     #     page_assets = self.extract_asset_links(html_doc)
     #     new_result = Result(url=url, assets=page_assets)
     #     results.append(new_result)
+    #
     #     return self.parse_r(self.visit_queue.pop(), results)
 
 
@@ -73,7 +76,12 @@ class Crawler(object):
                 continue
 
             self.visited_sites[curr_url] = True
-            html_doc = self.html_reader(curr_url)
+
+            # make sure page is reachable
+            try:
+                html_doc = self.html_reader(curr_url)
+            except Exception as e: # NOTE: we can make this more robust by having the readers throw custom exceptions
+                continue
 
             logger.info("\tExtracting links...")
             child_pages = self.extract_links(html_doc)
