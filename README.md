@@ -36,9 +36,21 @@ To run the crawler with a custom url, pass in a url flag. For example, to run wi
 
 *NOTE:* The URL specified must contain the protocol and full domain name. `example.com` is invalid however, `http://example.com` is valid.
 
+### Logging
+When running on a large website, it can be boring staring at the terminal with no indication of what's happening. To fix this, you can enable logging with the `--log` flag. Example run with logging: `python main.py --log --url https://gocardless.com`
 
-## Using Docker
-Love containers? Don't want to install dependencies in
+
+### Running in isolation
+Love containers? Don't want to install dependencies on your computer? Docker has you covered.
+
+First, you build the container by running the following commands in the rot folder of the project.
+
+- `docker build -t fayimora/asset-aggregator .` (~81mb download on first run)
+- `docker run fayimora/asset-aggregator`
+
+Please note that the image name `fayimora/asset-aggregator` above can and probably should be changed to something else.
+
+The docker container runs the crawler on `https://gocardless.com` with logging enabled. To disable this, edit the `Dockerfile` in the project and remove the `--log` flag. You can also edit the URL in the Dockerfile.
 
 
 # How to run tests
