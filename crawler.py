@@ -7,8 +7,6 @@ except ImportError:
     # Python 2
     from urlparse import urlparse, urljoin
 
-LOG_FORMAT = '%(asctime)-15s: %(message)s'
-logging.basicConfig(format=LOG_FORMAT)
 logger = logging.getLogger()
 
 class Result(object):
@@ -169,3 +167,4 @@ class Crawler(object):
                 continue
             results.add(self.build_url(asset))
         return results
+
