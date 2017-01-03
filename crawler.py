@@ -1,6 +1,11 @@
 from parsel import Selector
-from urlparse import urlparse, urljoin
 import logging
+try:
+    # Python 3
+    from urllib.parse import urlparse, urljoin
+except ImportError:
+    # Python 2
+    from urlparse import urlparse, urljoin
 
 LOG_FORMAT = '%(asctime)-15s: %(message)s'
 logging.basicConfig(format=LOG_FORMAT)
@@ -72,7 +77,7 @@ class Crawler(object):
             curr_url = self.visit_queue.pop()
             logger.info("Checking "+curr_url)
 
-            if self.visited_sites.has_key(curr_url): # don't visit a node more than once
+            if curr_url in self.visited_sites: # don't visit a node more than once
                 continue
 
             self.visited_sites[curr_url] = True
